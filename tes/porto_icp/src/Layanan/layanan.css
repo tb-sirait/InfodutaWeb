@@ -340,3 +340,25 @@ footer {
 .map-box {
   padding: 10px;
 }
+
+@media (max-width: 600px) {
+  .kontak h3,
+  .kontak p,
+  .kontak span,
+  .kontak li,
+  .kontak div,
+  .kontak strong {
+    font-size: 0.6rem;
+  }
+
+  .map-box {
+    max-width: 300px;
+    max-height: 200px;
+    margin: 0 auto;
+  }
+
+  .map-box iframe {
+    width: 100% !important;
+    height: 150px !important;
+  }
+}

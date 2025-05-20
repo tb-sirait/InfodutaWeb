@@ -7,6 +7,8 @@ import Produk from "./Produk/Produk"
 import Tentang from "./Tentang/Tentang"
 import Karir from "./Karir/Karir"
 
+import CookieConsent from "./components/CookieConsent"
+
 function App() {
   return (
     <Router>
@@ -18,6 +20,7 @@ function App() {
         <Route path="/tentang" element={<Tentang />} />
         <Route path="/karir" element={<Karir />} />
       </Routes>
+      <CookieConsent />
     </Router>
   )
 }

@@ -217,15 +217,54 @@ section
     gap: 30px;
   }
 
+  .intro-image {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  .intro-text {
+    width: 100% !important;
+    padding: 0 1rem !important;
+  }
+
+  .struktur-organisasi img {
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 1rem auto !important;
+    display: block !important;
+  }
+
   .brand-logos,
   .partner-logos {
     grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .brand-logos img,
+  .partner-logos img {
+    max-width: 80px !important;
+    height: auto !important;
+  }
+
+  .partners .partner-logos {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 1rem !important;
+  }
+
+  .partners .partner-logos img {
+    max-width: 100px !important;
+    height: auto !important;
   }
 
   .visi,
   .misi {
-    text-align: center;
-    padding: 20px;
+    text-align: left !important;
+    padding: 13px;
+    width: 100% !important;
+    margin-bottom: 0rem !important;
+    font-size: 11px !important;
   }
 
   .header h2 {

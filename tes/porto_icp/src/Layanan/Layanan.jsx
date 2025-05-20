@@ -29,6 +29,19 @@ function Layanan() {
     const phoneNumber2 = "628975808407";
     const whatsappLink2 = `https://wa.me/${phoneNumber2}?text=${message}`;
 
+    // New state for modal visibility
+    const [modalOpen, setModalOpen] = useState(false);
+
+    // Function to open modal
+    const openModal = () => {
+      setModalOpen(true);
+    };
+
+    // Function to close modal
+    const closeModal = () => {
+      setModalOpen(false);
+    };
+
     useEffect(() => {
         timeoutRef.current = setTimeout(() => {
         setIsAnimating(true);
@@ -47,7 +60,7 @@ function Layanan() {
         <Navbar />
         <div className="bagian-atas">
             <div className="overlay"></div>
-            <div class="layanan-text">
+            <div className="layanan-text">
                 <h1>Layanan</h1>
                 <div className="garis"></div>
                 <p>Layanan yang ditawarkan oleh perusahaan kami:</p>
@@ -138,6 +151,16 @@ function Layanan() {
                           <span>dewi.handayani@infoduta.com</span>
                         </div>
                         <a 
+                          href= "" 
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{ textDecoration: "none", color: "white", gap: "10px", display: "flex", alignItems: "left" }}
+                          onClick={(e) => { e.preventDefault(); openModal(); }}
+                        >
+                          <FaEnvelope className="icon" />
+                          <span>Hubungi Admin Sales</span>
+                        </a>
+                        <a 
                           href= {whatsappLink} 
                           target="_blank"
                           rel="noopener noreferrer"
@@ -171,6 +194,26 @@ function Layanan() {
                     </div>
                     </div>
         </section>
+
+        {/* Modal for Admin Sales Emails */}
+        {modalOpen && (
+          <div className="modal-backdrop" onClick={closeModal}>
+            <div className="modal-container" onClick={(e) => e.stopPropagation()}>
+              <h2 className="text-xl font-bold mb-4">Daftar Email Admin Sales</h2>
+              <ul className="space-y-2 text-base">
+                <li>sales.1@infoduta.com</li>
+                <li>sales.2@infoduta.com</li>
+                <li>sales.3@infoduta.com</li>
+                <li>sales.6@infoduta.com</li>
+                <li>sales.7@infoduta.com</li>
+              </ul>
+              <div className="flex justify-end space-x-2 mt-4">
+                <button onClick={closeModal} className="cancel-btn">Close</button>
+              </div>
+            </div>
+          </div>
+        )}
+
         <Footer />
         </>
     )

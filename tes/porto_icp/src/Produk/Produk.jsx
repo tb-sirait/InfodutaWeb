@@ -1,7 +1,9 @@
-import React, { useState } from "react"
+
+import React, { useState, useEffect, useRef } from "react"
 
 import Navbar from "../Navigation/Navbar"
 import "./produk.css"
+import "./manual_additions.css"
 import Footer from "../Navigation/footer"
 
 export default function Produk() {
@@ -10,6 +12,19 @@ export default function Produk() {
   const [selectedBrand, setSelectedBrand] = useState(null)
   const [brandClickCount, setBrandClickCount] = useState(0)
   const [isNoProductModalOpen, setIsNoProductModalOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  const touchStartX = useRef(null)
+  const touchEndX = useRef(null)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    handleResize()
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
 
   const products = [
     {
@@ -17,8 +32,8 @@ export default function Produk() {
       name: "OptiPlex 3000 Tower",
       brand: "Dell",
       images: [
-        "../src/assets/produk/Dell_optiplex_3000_Tower.png",
-        "../src/assets/produk/Dell_optiplex_3000_Tower_side.png"
+        "../src/assets/produk/Dell/Optiplex/3000_Tower/3.png",
+        "../src/assets/produk/Dell/Optiplex/3000_Tower/4.png"
       ],
       specs: {
         cpu: "Intel Core i5",
@@ -33,8 +48,7 @@ export default function Produk() {
       name: "Optiplex 7010 PLUS SFF",
       brand: "Dell",
       images: [
-        "../src/assets/produk/Dell_optiplex_7010_plus_sff.png",
-        "../src/assets/produk/Dell_optiplex_7010_plus_sff_back.png"
+        "../src/assets/produk/Dell/Optiplex/7010_Plus_SFF/1.png"
       ],
       specs: {
         cpu: "Intel Core i7",
@@ -49,7 +63,7 @@ export default function Produk() {
       name: "Precision Workstation 5490",
       brand: "Dell",
       images: [
-        "../src/assets/produk/Dell_Mobile_Precision_Workstation_5490_Ultra7.png"
+        "../src/assets/produk/Dell/Notebook/Precision/1.png"
       ],
       specs: {
         cpu: "Intel Xeon",
@@ -64,7 +78,7 @@ export default function Produk() {
       name: "Latitude 3440 Laptop",
       brand: "Dell",
       images: [
-        "../src/assets/produk/Dell_latitude_3440_laptop.png"
+        "../src/assets/produk/Dell/Notebook/Lattitude/3440_Laptop/1.png"
       ],
       specs: {
         cpu: "Intel Core i5",
@@ -79,7 +93,7 @@ export default function Produk() {
       name: "Notebook V14-IIL",
       brand: "Lenovo",
       images: [
-        "../src/assets/produk/Notebook_V14-IIL.png"
+        "../src/assets/produk/Lenovo/Notebook_V14/1.png"
       ],
       specs: {
         cpu: "AMD Ryzen 5",
@@ -91,17 +105,18 @@ export default function Produk() {
     },
     {
       id: 6,
-      name: "OptiPlex 3000 Tower",
+      name: "XPS 9310 Laptop",
       brand: "Dell",
       images: [
-        "../src/assets/produk/Dell_optiplex_3000_tower.png"
+        "../src/assets/produk/Dell/Notebook/XPS/9310/1.png",
+        "../src/assets/produk/Dell/Notebook/XPS/9310/2.png"
       ],
       specs: {
-        cpu: "Intel Core i5",
-        ram: "8GB",
-        storage: "256GB SSD",
+        cpu: "Intel Core I7-1185G7",
+        ram: "16GB",
+        storage: "1TB SSD",
         gpu: "Integrated Graphics",
-        os: "Windows 10",
+        os: "Windows 10 Pro edition",
       },
     },
   ]
@@ -130,8 +145,69 @@ export default function Produk() {
     setIsModalOpen(false)
   }
 
+  // Update image index with slide direction
+  const goToPreviousImage = () => {
+    setSlideDirection("left");
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === 0 ? selectedProduct.images.length - 1 : prevIndex - 1
+    );
+  };
+
+  const goToNextImage = () => {
+    setSlideDirection("right");
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === selectedProduct.images.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  // Add fade slide effect for product image change
+  const [fade, setFade] = useState(false);
+
+  // New state to track slide direction: "left" or "right"
+  const [slideDirection, setSlideDirection] = useState(null);
+
+  useEffect(() => {
+    if (selectedProduct) {
+      setFade(true);
+      const timer = setTimeout(() => setFade(false), 300); // duration matches CSS animation
+      return () => clearTimeout(timer);
+    }
+  }, [currentImageIndex, selectedProduct]);
+
+  // Add className to image for fade effect
+
+
   const closeNoProductModal = () => {
     setIsNoProductModalOpen(false)
+  }
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.changedTouches[0].clientX
+  }
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.changedTouches[0].clientX
+  }
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return
+    const distance = touchStartX.current - touchEndX.current
+    const minSwipeDistance = 50
+    if (distance > minSwipeDistance) {
+      // swipe left
+      setSlideDirection("right");
+      setCurrentImageIndex((prevIndex) =>
+        prevIndex === selectedProduct.images.length - 1 ? 0 : prevIndex + 1
+      )
+    } else if (distance < -minSwipeDistance) {
+      // swipe right
+      setSlideDirection("left");
+      setCurrentImageIndex((prevIndex) =>
+        prevIndex === 0 ? selectedProduct.images.length - 1 : prevIndex - 1
+      )
+    }
+    touchStartX.current = null
+    touchEndX.current = null
   }
 
   return (
@@ -195,35 +271,57 @@ export default function Produk() {
                     style={{ cursor: "pointer" }}
                     onClick={() => openModal(product)}
                   >
-                    <div className="flex flex-col items-center mr-8 separator-line">
-                  <img
-                    src={product.images && product.images.length > 0 ? product.images[0] : ""}
-                    alt={product.name}
-                    className="w-32 h-auto object-contain mb-4 rounded-lg"
-                  />
-                      <h4 className="text-2xl font-semibold" style={{fontSize: "18px"}}>{product.name}</h4>
-                      <h4 className="text-md font-medium text-gray-300"  style={{fontSize: "14px"}}>{product.brand}</h4>
-                    </div>
-
+                  <div className="flex flex-col items-center mr-8 separator-line">
+                <img
+                  src={product.images && product.images.length > 0 ? product.images[0] : ""}
+                  alt={product.name}
+                  style={isMobile ? { width: "80px", height: "80px", objectFit: "contain", opacity: fade ? 0 : 1, transition: "opacity 0.3s ease" } : { width: "300px", height: "300px", objectFit: "contain", opacity: fade ? 0 : 1, transition: "opacity 0.3s ease" }}
+                  className="mb-4 rounded-lg"
+                />
+                    <h4 className={`font-semibold ${isMobile ? "text-base" : "text-2xl"}`} style={{fontSize: isMobile ? "14px" : "18px"}}>{product.name}</h4>
+                    <h4 className={`font-medium text-gray-300 ${isMobile ? "text-xs" : "text-md"}`} style={{fontSize: isMobile ? "12px" : "14px"}}>{product.brand}</h4>
+                    {isMobile && (
+                      <ul className="space-y-2 text-sm border-t border-white pt-2 mt-2 w-full">
+                        <li className="flex items-center gap-3">
+                          <span style={{ marginRight: "0.5rem" }}>🧠</span> {product.specs.cpu}
+                        </li>
+                        <li className="flex items-center gap-3">
+                          <span style={{ marginRight: "0.5rem" }}>🎮</span> {product.specs.gpu}
+                        </li>
+                        <li className="flex items-center gap-3">
+                          <span style={{ marginRight: "0.5rem" }}>💾</span> {product.specs.ram}
+                        </li>
+                        <li className="flex items-center gap-3">
+                          <span style={{ marginRight: "0.5rem" }}>🗄️</span> {product.specs.storage}
+                        </li>
+                        <li className="flex items-center gap-3">
+                          <span style={{ marginRight: "0.5rem" }}>🖥️</span> {product.specs.os}
+                        </li>
+                      </ul>
+                    )}
+                  </div>
+  
+                  {!isMobile && (
                     <div className="flex-1">
                       <ul className="space-y-3 text-sm">
-                        <li className="flex items-center gap-3">
-                          <span>🧠</span> {product.specs.cpu}
+                        <li className="flex items-center gap-4">
+                          <span style={{ marginRight: "0.5rem" }}>🧠</span> {product.specs.cpu}
                         </li>
-                        <li className="flex items-center gap-3">
-                          <span>🎮</span> {product.specs.gpu}
+                        <li className="flex items-center gap-4">
+                          <span style={{ marginRight: "0.5rem" }}>🎮</span> {product.specs.gpu}
                         </li>
-                        <li className="flex items-center gap-3">
-                          <span>💾</span> {product.specs.ram}
+                        <li className="flex items-center gap-4">
+                          <span style={{ marginRight: "0.5rem" }}>💾</span> {product.specs.ram}
                         </li>
-                        <li className="flex items-center gap-3">
-                          <span>🗄️</span> {product.specs.storage}
+                        <li className="flex items-center gap-4">
+                          <span style={{ marginRight: "0.5rem" }}>🗄️</span> {product.specs.storage}
                         </li>
-                        <li className="flex items-center gap-3">
-                          <span>🖥️</span> {product.specs.os}
+                        <li className="flex items-center gap-4">
+                          <span style={{ marginRight: "0.5rem" }}>🖥️</span> {product.specs.os}
                         </li>
                       </ul>
                     </div>
+                  )}
                   </div>
                 ))
               ) : (
@@ -247,51 +345,63 @@ export default function Produk() {
                   >
                     <div className="flex flex-col items-center space-y-6">
               <div className="flex items-center space-x-4">
-                <button
-                  className="bg-blue-900 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors duration-300"
+                {!isMobile && (
+                  <button
+                  className="text-white rounded-lg transition-colors duration-300"
+                  style={{ width: "80px", height: "80px", backgroundColor: "transparent", padding: 0, display: "flex", alignItems: "center", justifyContent: "center", transform: "translateX(-20%) translateY(0)" }}
                   onClick={(e) => {
                     e.stopPropagation();
-                    setCurrentImageIndex((prevIndex) =>
-                      prevIndex === 0 ? selectedProduct.images.length - 1 : prevIndex - 1
-                    );
+                    goToPreviousImage();
                   }}
                 >
-                  Prev
+                  <img src="../src/assets/produk/icon/prev.png" alt="Previous" style={{ width: "60px", height: "60px", margin: 0, padding: 0 }} />
                 </button>
+                )}
                 <img
                   src={selectedProduct.images && selectedProduct.images.length > 0 ? selectedProduct.images[currentImageIndex] : ""}
                   alt={selectedProduct.name}
-                  className="w-48 h-auto object-contain rounded-lg shadow-md"
+                  className={`w-48 h-auto object-contain rounded-lg shadow-md ${
+                    slideDirection === "right"
+                      ? "slide-in-right"
+                      : slideDirection === "left"
+                      ? "slide-in-left"
+                      : ""
+                  }`}
+                  onTouchStart={handleTouchStart}
+                  onTouchMove={handleTouchMove}
+                  onTouchEnd={handleTouchEnd}
+                  onAnimationEnd={() => setSlideDirection(null)}
                 />
-                <button
-                  className="bg-blue-900 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors duration-300"
+                {!isMobile && (
+                  <button
+                  className="text-white rounded-lg transition-colors duration-300"
+                  style={{ width: "80px", height: "80px", backgroundColor: "transparent", padding: 0, display: "flex", alignItems: "center", justifyContent: "center", transform: "translateX(20%) translateY(0)" }}
                   onClick={(e) => {
                     e.stopPropagation();
-                    setCurrentImageIndex((prevIndex) =>
-                      prevIndex === selectedProduct.images.length - 1 ? 0 : prevIndex + 1
-                    );
+                    goToNextImage();
                   }}
                 >
-                  Next
+                  <img src="../src/assets/produk/icon/next.png" alt="Next" style={{ width: "60px", height: "60px", margin: 0, padding: 0 }} />
                 </button>
+                )}
               </div>
               <h3 className="text-2xl font-bold">{selectedProduct.name}</h3>
               <p className="font-semibold">Brand: {selectedProduct.brand}</p>
               <ul className="space-y-2 text-sm">
                 <li className="flex items-center gap-3">
-                  <span>🧠</span> {selectedProduct.specs.cpu}
+                  <span style={{ marginRight: "0.5rem" }}>🧠</span> {selectedProduct.specs.cpu}
                 </li>
                 <li className="flex items-center gap-3">
-                  <span>🎮</span> {selectedProduct.specs.gpu}
+                  <span style={{ marginRight: "0.5rem" }}>🎮</span> {selectedProduct.specs.gpu}
                 </li>
                 <li className="flex items-center gap-3">
-                  <span>💾</span> {selectedProduct.specs.ram}
+                  <span style={{ marginRight: "0.5rem" }}>💾</span> {selectedProduct.specs.ram}
                 </li>
                 <li className="flex items-center gap-3">
-                  <span>🗄️</span> {selectedProduct.specs.storage}
+                  <span style={{ marginRight: "0.5rem" }}>🗄️</span> {selectedProduct.specs.storage}
                 </li>
                 <li className="flex items-center gap-3">
-                  <span>🖥️</span> {selectedProduct.specs.os}
+                  <span style={{ marginRight: "0.5rem" }}>🖥️</span> {selectedProduct.specs.os}
                 </li>
               </ul>
               <div className="flex space-x-6">
@@ -299,13 +409,25 @@ export default function Produk() {
                   href={`https://wa.me/628975808407?text=${encodeURIComponent(`Saya berminat pada unit produk ${selectedProduct.name} untuk perusahaan saya. Bisa diskusi untuk produknya?`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-blue-900 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors duration-300 inline-block text-center"
+                  className={`bg-blue-900 hover:bg-blue-700 hover:text-green-500 text-white rounded-lg transition-colors duration-300 inline-flex items-center justify-center ${isMobile ? "px-4 py-1 text-sm" : "px-6 py-2"}`}
                   onClick={(e) => e.stopPropagation()}
                 >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="#25D366"
+                    viewBox="0 0 24 24"
+                    strokeWidth="0"
+                    stroke="none"
+                    style={{ width: "16px", height: "16px", marginRight: "0.5rem" }}
+                    aria-hidden="true"
+                  >
+                    <path d="M20.52 3.48A11.94 11.94 0 0012 0C5.373 0 0 5.373 0 12a11.94 11.94 0 001.64 6.04L0 24l6.04-1.64A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12 0-3.2-1.25-6.21-3.48-8.52zM12 21.5a9.5 9.5 0 01-4.84-1.38l-.35-.21-3.58.97.96-3.5-.23-.36A9.5 9.5 0 1121.5 12c0 5.25-4.25 9.5-9.5 9.5zm5.3-7.1c-.29-.15-1.7-.84-1.96-.94-.26-.1-.45-.15-.64.15-.19.29-.74.94-.9 1.13-.16.19-.32.21-.6.07-.29-.15-1.22-.45-2.33-1.44-.86-.77-1.44-1.72-1.61-2.01-.17-.29-.02-.45.13-.6.13-.13.29-.32.44-.48.15-.16.19-.29.29-.48.1-.19.05-.36-.02-.51-.07-.15-.64-1.54-.88-2.11-.23-.55-.46-.48-.64-.49-.16-.01-.36-.01-.55-.01-.19 0-.5.07-.76.36-.26.29-1 1-1 2.44 0 1.44 1.03 2.83 1.17 3.03.13.19 2.02 3.08 4.9 4.32.68.29 1.21.46 1.62.59.68.22 1.3.19 1.79.12.55-.08 1.7-.69 1.94-1.36.24-.68.24-1.26.17-1.38-.07-.12-.26-.19-.55-.34z" />
+                  </svg>
                   Hubungi kami
                 </a>
                 <button
-                  className="bg-blue-900 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors duration-300"
+                  className={`bg-blue-900 hover:bg-blue-700 text-white rounded-lg transition-colors duration-300 ${isMobile ? "px-4 py-1 text-sm" : "px-6 py-2"}`}
+                  style={{ marginLeft: "1rem" }}
                   onClick={closeModal}
                 >
                   Close

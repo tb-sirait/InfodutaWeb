@@ -226,8 +226,14 @@ body {
 /* New class to enlarge Produk, Layanan, Tentang buttons by 20% and set cursor pointer */
 .larger-button {
   font-size: 1.5rem; /* 20% larger than 1.25rem */
-  padding: 2.4rem; /* 20% larger than 2rem */
+  padding: 3.2rem; /* increased padding for larger buttons */
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.larger-button:hover {
+  background-color: #154a8a; /* slightly darker blue on hover */
+  transform: scale(1.05);
 }
 
 .border-t {
@@ -279,11 +285,12 @@ body {
 /* Make hero image height responsive */
 @media (max-width: 700px) {
   section.relative img {
-    height: 280px !important;
+    height: auto !important;
     width: 100% !important;
+    object-fit: contain !important;
   }
   .image-blue-overlay {
-    height: 280px !important;
+    height: auto !important;
     width: 100% !important;
   }
   .text-img p {
@@ -291,9 +298,14 @@ body {
     top: 50% !important;
     left: 50% !important;
     transform: translate(-150%, -30%) !important;
-    font-size: 12.5px !important;
+    font-size: 13px !important;
     margin: 0 !important;
     padding: 0 !important;
+  }
+
+  .flex-sc-mbl > div {
+    padding: 2rem !important;/* increase padding more on mobile */
+    margin-left: -30px !important;
   }
   
   .text-img button {

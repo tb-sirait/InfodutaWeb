@@ -10,3 +10,10 @@
   font-size: 0.75rem; /* text-xs */
   color: #1e40af; /* text-blue-900 */
 }
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 0.5rem; /* p-2 */
+    font-size: 0.5rem; /* text-sm */
+  }
+}

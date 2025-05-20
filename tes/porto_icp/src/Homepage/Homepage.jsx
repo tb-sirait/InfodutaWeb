@@ -16,7 +16,7 @@ function Homepage() {
           className="w-full h-auto object-cover"
           src="src/assets/kantor_icp.png"
         />
-        <div className="image-blue-overlay" />
+        
         <div
           className="absolute top-1/2 right-10 transform -translate-y-1/2 text-white max-w-md text-lg leading-relaxed sm:max-w-sm sm:right-5 sm:top-auto sm:bottom-5 sm:left-5 sm:transform-none text-img"
           style={{ textShadow: '0 0 10px rgba(0,0,0,0.6)', zIndex: 1 }}

@@ -221,6 +221,7 @@ footer {
   padding: 0.5rem 0rem;
   font-size: 1rem;
   background-color: white;
+  color: black; /* ensure text is black */
 }
 
 /* New button style for white background, blue text, thin shadow */
@@ -236,8 +237,9 @@ footer {
   border: none;
 }
 
+/* Button hover effect */
 .custom-button-white:hover {
-  background-color: #f0f9ff;
+  background-color: #e0f2fe !important; /* light blue */
 }
 
 /* Buttons styling */
@@ -267,8 +269,6 @@ footer {
   background-color: #1d4ed8; /* blue-700 */
 }
 
-
-
 .title1, .title2 {
     font-size: 2rem;
     margin-bottom: 1rem;
@@ -288,5 +288,20 @@ footer {
 
 .title1, .title2, .what-is{
     color: white;
+}
+
+.list-syarat{
+    color: white;
+    text-align: left;
+}
+
+button {
+    background-color: #ffd369; /* blue-600 */
+    color: #9ca3af;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 

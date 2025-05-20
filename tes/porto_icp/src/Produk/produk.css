@@ -30,13 +30,56 @@
   background-color: white;
   border-radius: 1rem;
   padding: 2rem;
-  max-width: 28rem; /* 448px */
-  width: 90%;
+  max-width: fit-content;
+  width: auto;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   z-index: 60;
   opacity: 0;
   transform: translateY(-20px);
   animation: fadeInUp 0.3s forwards;
+}
+
+/* Fade slide effect for product image */
+.product-image-fade {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.product-image-show {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* Slide in from right */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Slide in from left */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-right {
+  animation: slideInRight 0.4s ease forwards;
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.4s ease forwards;
 }
 
 @keyframes fadeInUp {
@@ -264,6 +307,41 @@ main {
   .cursor-pointer {
     padding: 0.5rem !important;
   }
+
+  /* Responsive modal content */
+  .modal-content {
+    max-width: 95% !important;
+    width: 95% !important;
+    padding: 1rem !important;
+  }
+
+  /* Adjust product card padding and layout on mobile */
+  .product-card {
+    padding-right: 1rem !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  /* Resize product image on mobile */
+  .product-card .separator-line img {
+    width: 80px !important;
+    height: 80px !important;
+  }
+
+  /* Move specs below name and brand with border */
+  .product-card .separator-line ul {
+    border-top: 1px solid white;
+    padding-top: 0.5rem;
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+
+  /* Remove vertical border on right side of image on mobile */
+  .product-card .separator-line {
+    border-right: none !important;
+    padding-right: 0 !important;
+    margin-right: 0 !important;
+  }
 }
 
 .icon-container {
@@ -301,4 +379,20 @@ main {
 
 .specs-text-spacing {
   padding-left: 0rem;
+}
+
+.whatsapp-button-hover {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.whatsapp-button-hover:hover {
+  background-color: #3b82f6 !important; /* lighter blue */
+  color: #22c55e !important; /* green-500 */
+}
+
+@media (max-width: 700px) {
+  .whatsapp-button-container {
+    display: flex;
+    gap: 10px !important; /* enforce gap between buttons */
+  }
 }
