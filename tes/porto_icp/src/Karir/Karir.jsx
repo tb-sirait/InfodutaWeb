@@ -79,7 +79,7 @@ function Karir() {
   return (
     <>
       <Navbar />
-      <div className="background-image"></div>
+      <div className="background-image mobile-background"></div>
       <div className="blue-overlay"></div>
       <main className="max-w-5xl mx-auto px-6 py-10 relative z-10">
         <h1 className="context text-2xl font-extrabold mb-3">Karir</h1>

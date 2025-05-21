@@ -4,7 +4,7 @@ import { FaEnvelope, FaWhatsapp, FaPhone, FaMapMarkerAlt } from 'react-icons/fa'
 import Navbar from "../Navigation/Navbar"
 import "./tentang.css"
 import Footer from "../Navigation/footer"
-import kantorImage from "../assets/Kantor.png";
+import kantorImage from "../assets/kantor_icp.png";
 import strukturImage from "../assets/struktur_keorganisasian_icp.png";
 import dellLogo from "../assets/Dell_logo.png";
 import lenovoLogo from "../assets/lenovo_logo.png";

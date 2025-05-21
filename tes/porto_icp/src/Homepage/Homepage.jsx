@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../Navigation/Navbar';
 import Footer from '../Navigation/footer';
 import './homepage.css';
 
-import KantorImage from '../assets/kantor_icp.png';
+import KantorImage from '../assets/kantor_icp(landscape1).png';
 import ArrowImage from '../assets/arrow.png';
 import WorkstationImage from '../assets/Workstation.png';
 import ServicesImage from '../assets/Services.png';
@@ -12,6 +12,28 @@ import AboutImage from '../assets/About.png';
 
 function Homepage() {
   const navigate = useNavigate();
+  const [animate, setAnimate] = useState(false);
+  const [scrollAnimate, setScrollAnimate] = useState(false);
+  const mainContentRef = useRef(null);
+
+  useEffect(() => {
+    setAnimate(true);
+  }, []);
+
+  useEffect(() => {
+    function handleScroll() {
+      if (mainContentRef.current) {
+        const rect = mainContentRef.current.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom >= 0) {
+          setScrollAnimate(true);
+          console.log('Main content entered viewport, animation triggered');
+          window.removeEventListener('scroll', handleScroll);
+        }
+      }
+    }
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <>
@@ -25,7 +47,7 @@ function Homepage() {
         />
 
         <div
-          className="absolute top-1/2 right-10 transform -translate-y-1/2 text-white max-w-md text-lg leading-relaxed sm:max-w-sm sm:right-5 sm:top-auto sm:bottom-5 sm:left-5 sm:transform-none text-img"
+          className={`absolute top-1/2 right-10 transform -translate-y-1/2 text-white max-w-md text-lg leading-relaxed sm:max-w-sm sm:right-5 sm:top-auto sm:bottom-5 sm:left-5 sm:transform-none text-img ${animate ? 'fade-in-up' : ''}`}
           style={{ textShadow: '0 0 10px rgba(0,0,0,0.6)', zIndex: 1 }}
         >
           <p>
@@ -47,7 +69,10 @@ function Homepage() {
       </section>
 
       {/* Main Content */}
-      <main className="py-12 px-6 text-center max-w-6xl mx-auto">
+      <main
+        ref={mainContentRef}
+        className={`py-12 px-6 text-center max-w-6xl mx-auto ${scrollAnimate ? 'fade-in-up' : ''}`}
+      >
         <h1 className="font-extrabold text-2xl mb-1">Eksplor Infoduta</h1>
         <p className="font-semibold text-sm mb-10">Lebih dekat dengan perusahaan kami:</p>
         <div className="flex flex-sc-mbl sm:flex-row justify-center gap-8">

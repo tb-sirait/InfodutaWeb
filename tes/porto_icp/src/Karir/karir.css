@@ -70,7 +70,6 @@ main.relative {
 .title1, .title2 {
     font-size: 2rem;
     margin-bottom: 1rem;
-    color: #ffd369; /* Highlight color */
     font-weight: 600;
     text-align: center;
 }
@@ -253,29 +252,30 @@ footer {
 }
 
 .modal-container button.cancel-btn {
-  background-color: #d1d5db; /* gray-300 */
-  color: #374151; /* gray-700 */
+  background-color: red; /* gray-300 */
+  color: rgb(255, 255, 255); /* gray-700 */
 }
-
 .modal-container button.cancel-btn:hover {
   background-color: #9ca3af; /* gray-400 */
 }
-
 .modal-container button.submit-btn {
   background-color: #2563eb; /* blue-600 */
   color: white;
 }
-
 .modal-container button.submit-btn:hover {
   background-color: #1d4ed8; /* blue-700 */
 }
 
-.title1, .title2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #ffd369; /* Highlight color */
-    font-weight: 600;
+/* Add 5px gap between form fields */
+.modal-container form > div {
+  margin-bottom: 5px;
 }
+
+/* Add spacing between buttons */
+.modal-container .flex.justify-end.space-x-2 {
+  gap: 5px;
+}
+
 
 .karir-section > div {
     flex: 1;
@@ -283,19 +283,16 @@ footer {
     flex-direction: column;
     justify-content: flex-start;
 }
-.context, .text1 {
-    color: white;
+.context, .text1, .text2 {
+    color: #ffffff;
 }
-
-.title1, .title2, .what-is{
-    color: white;
+.title1, .title2 {
+    color: #1434a4;
 }
-
 .list-syarat{
     color: #003B8F;
     text-align: left;
 }
-
 button {
     background-color: #ffd369; /* blue-600 */
     color: #9ca3af;
