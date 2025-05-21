@@ -4,8 +4,30 @@ import { FaEnvelope, FaWhatsapp, FaPhone, FaMapMarkerAlt } from 'react-icons/fa'
 import Navbar from "../Navigation/Navbar"
 import "./tentang.css"
 import Footer from "../Navigation/footer"
+import kantorImage from "../assets/Kantor.png";
+import strukturImage from "../assets/struktur_keorganisasian_icp.png";
+import dellLogo from "../assets/Dell_logo.png";
+import lenovoLogo from "../assets/lenovo_logo.png";
+import ciscoLogo from "../assets/Cisco_logo.png";
+import microsoftLogo from "../assets/microsoft_logo.png";
+import asusLogo from "../assets/Asus_logo.png";
+import samsungLogo from "../assets/samsung_logo.png";
+import hpLogo from "../assets/hp_logo.png";
+import appleLogo from "../assets/Apple_logo.png";
+import wdLogo from "../assets/wd_logo.png";
+import infocusLogo from "../assets/Infocus_logo.png";
+import pertaminaLogo from "../assets/pertamina_logo.png";
+import telkomLogo from "../assets/Telkom_logo.png";
+import tmLogo from "../assets/TM_logo.png";
+import plnLogo from "../assets/pln_logo.png";
+
+import { useEffect } from "react";
 
 function Tentang() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const message = encodeURIComponent("saya berminat kak");
   const phoneNumber = "6281314118264";
   const whatsappLink = `https://wa.me/${phoneNumber}?text=${message}`;
@@ -25,7 +47,11 @@ function Tentang() {
 
           <div className="about-us" style={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
             <div className="intro">
-              <img src="../src\assets\Kantor.png" alt="Gedung" className="intro-image" />
+
+              <div className="kantor-overlay-container">
+                <img src={kantorImage} alt="Gedung" className="intro-image" />
+                <div className="kantor-overlay"></div>
+              </div>
               <div className="intro-text">
                 <p><strong>PT Infoduta Computindo Perkasa</strong> adalah perusahaan yang bergerak di bidang Teknologi Informasi (IT) untuk memenuhi kebutuhan hardware dan software yang dimiliki oleh perusahaan-perusahaan di Indonesia, untuk memenuhi kebutuhan sesuai dengan pembelian.</p>
                 <p><strong>PT Infoduta Computindo Perkasa</strong> telah berdiri sejak tahun 1995 dan hingga saat ini, telah dipercaya untuk mendukung vendor tetap produk IT di perusahaan besar di Indonesia seperti: Pertamina Group, Telkom Group, Telkom Malaysia, Perbankan, dan masih banyak lagi.</p>
@@ -35,33 +61,32 @@ function Tentang() {
           </div>
 
           <div className="struktur-organisasi">
-            <img src="../src\assets\Struktur-organisasi.png" alt="Struktur Organisasi" className="struktur-image" />
+            <img src={strukturImage} alt="Struktur Organisasi" className="struktur-image" />
           </div>
 
           <section className="brand-support">
             <h3>Brand Partner Support</h3>
             <div className="brand-logos">
-              {/* Ganti src dengan path logo yang benar */} 
-              <img src="../src/assets/Dell_logo.png" alt="Dell" />
-              <img src="../src/assets/lenovo_logo.png" alt="Lenovo" />
-              <img src="../src/assets/Cisco_logo.png" alt="Cisco" />
-              <img src="..\src\assets\microsoft_logo.png" alt="Microsoft" />
-              <img src="../src/assets/Asus_logo.png" alt="Asus" />
-              <img src="../src/assets/samsung_logo.png" alt="Samsung" />
-              <img src="../src/assets/hp_logo.png" alt="HP" />
-              <img src="../src/assets/Apple_logo.png" alt="Apple" />
-              <img src="../src/assets/wd_logo.png" alt="WD" />
-              <img src="../src/assets/Infocus_logo.png" alt="InFocus" />
+              <img src={dellLogo} alt="Dell" />
+              <img src={lenovoLogo} alt="Lenovo" />
+              <img src={ciscoLogo} alt="Cisco" />
+              <img src={microsoftLogo} alt="Microsoft" />
+              <img src={asusLogo} alt="Asus" />
+              <img src={samsungLogo} alt="Samsung" />
+              <img src={hpLogo} alt="HP" />
+              <img src={appleLogo} alt="Apple" />
+              <img src={wdLogo} alt="WD" />
+              <img src={infocusLogo} alt="InFocus" />
             </div>
           </section>
 
           <section className="partners">
             <h3>Rekan Kerja Perusahaan</h3>
-            <div className="partner-logos" style={{ display: "flex", justifyContent: "space-between", width: "fi", maxWidth: "1200px", gap: "40px", marginBottom: "50px"}}>
-              <img src="../src/assets/pertamina_logo.png" alt="Pertamina" />
-              <img src="../src/assets/Telkom_logo.png" alt="Telkom Indonesia" />
-              <img src="../src/assets/TM_logo.png" alt="TM" />
-              <img src="../src/assets/pln_logo.png" alt="PLN" />
+            <div className="partner-logos" style={{ display: "flex", justifyContent: "space-between", maxWidth: "1200px", gap: "40px", marginBottom: "50px"}}>
+              <img src={pertaminaLogo} alt="Pertamina" />
+              <img src={telkomLogo} alt="Telkom Indonesia" />
+              <img src={tmLogo} alt="TM" />
+              <img src={plnLogo} alt="PLN" />
             </div>
           </section>
 

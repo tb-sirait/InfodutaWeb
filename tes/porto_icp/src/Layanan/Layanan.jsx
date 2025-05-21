@@ -7,15 +7,30 @@ import { FaEnvelope, FaWhatsapp, FaPhone, FaMapMarkerAlt } from 'react-icons/fa'
 import Navbar from "../Navigation/Navbar"
 import "../layanan/layanan.css"
 import Footer from "../Navigation/footer"
+import aiGeneratifProduk from "../assets/layanan/ai_generatif_produk.png";
+import aiGeneratifService from "../assets/layanan/ai_generatif_service.png";
+
+import consulIt from "../assets/layanan/consul_it.png";
+import hardwareIt from "../assets/layanan/hardware_it.png";
+import procureIt from "../assets/layanan/procure_it.png";
+import serviceIt from "../assets/layanan/service_it.png";
+
+import kantorIcp from "../assets/kantor_icp.png";
 
 const images = [
-    "../src/assets/layanan/consul_it.png",
-    "../src/assets/layanan/hardware_it.png",
-    "../src/assets/layanan/procure_it.png",
-    "../src/assets/layanan/service_it.png"
+    consulIt,
+    hardwareIt,
+    procureIt,
+    serviceIt
   ];
 
+
+
 function Layanan() {
+
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const [nextIndex, setNextIndex] = useState(1);
@@ -58,7 +73,7 @@ function Layanan() {
     return (
         <>
         <Navbar />
-        <div className="bagian-atas">
+        <div className="bagian-atas" style={{backgroundImage: `url(${kantorIcp})`, backgroundRepeat: "no-repeat", backgroundPosition: "center center", backgroundAttachment: "fixed", backgroundSize: "cover"}}>
             <div className="overlay"></div>
             <div className="layanan-text">
                 <h1>Layanan</h1>
@@ -92,8 +107,9 @@ function Layanan() {
         <section className="highlight">
             <h2>Penjualan & Penyewaan Produk IT</h2>
             <div className="highlight-content-left">
+
                 <img
-                    src="../src/assets/layanan/ai_generatif_produk.png"
+                    src={aiGeneratifProduk}
                     alt="Penjualan dan Penyewaan Produk IT"
                     className="highlight-image"
                 />
@@ -104,7 +120,7 @@ function Layanan() {
         </section>
         <section className="highlight-2">
             <h2>Layanan Purnajual Unggulan</h2>
-            <div className="highlight-content-right" style={{ display: "flex", flex: 2, flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+            <div className="highlight-content-right" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <div className="highlight-content-right-text">
                     <p>
                         Sebagai bentuk komitmen kami terhadap kualitas dan kepuasan pelanggan, layanan purnajual Infoduta menyediakan:
@@ -117,7 +133,7 @@ function Layanan() {
                     </ul>
                 </div>    
                 <img
-                    src="../src/assets/layanan/ai_generatif_service.png"
+                    src={aiGeneratifService}
                     alt="Layanan Purnajual Unggulan"
                     className="highlight-image"
                 />
@@ -167,7 +183,7 @@ function Layanan() {
                           style={{ textDecoration: "none", color: "white", gap: "10px", display: "flex", alignItems: "left" }}
                         >
                           <FaWhatsapp className="icon" />
-                          <span>0813-1411-8264 (Dian)</span>
+                          <span>0813-1411-8264</span>
                         </a>
                         <a 
                           href={whatsappLink2}
@@ -176,7 +192,7 @@ function Layanan() {
                           style={{ textDecoration: "none", color: "white", gap: "10px", display: "flex", alignItems: "left" }}
                         >
                           <FaWhatsapp className="icon" />
-                          <span>0897-5808-407 (Dewi)</span>
+                          <span>0897-5808-407</span>
                         </a>
                         <div className="kontak-item">
                           <FaPhone className="icon" />

@@ -5,6 +5,25 @@ import Navbar from "../Navigation/Navbar"
 import "./produk.css"
 import "./manual_additions.css"
 import Footer from "../Navigation/footer"
+import optiplex3000Tower3 from "../assets/produk/Dell/Optiplex/3000_Tower/3.png";
+import optiplex3000Tower4 from "../assets/produk/Dell/Optiplex/3000_Tower/4.png";
+import optiplex7010PlusSFF1 from "../assets/produk/Dell/Optiplex/7010_Plus_SFF/1.png";
+import precisionWorkstation5490 from "../assets/produk/Dell/Notebook/Precision/1.png";
+import latitude3440Laptop from "../assets/produk/Dell/Notebook/Lattitude/3440_Laptop/1.png";
+import notebookV14IIL from "../assets/produk/Lenovo/Notebook_V14/1.png";
+import xps9310Laptop1 from "../assets/produk/Dell/Notebook/XPS/9310/1.png";
+import xps9310Laptop2 from "../assets/produk/Dell/Notebook/XPS/9310/2.png";
+
+import DellLogo from "../assets/Dell_logo.png";
+import LenovoLogo from "../assets/lenovo_logo.png";
+import CiscoLogo from "../assets/Cisco_logo.png";
+import SamsungLogo from "../assets/samsung_logo.png";
+import AsusLogo from "../assets/Asus_logo.png";
+import HpLogo from "../assets/hp_logo.png";
+import InfocusLogo from "../assets/Infocus_logo.png";
+import AppleLogo from "../assets/Apple_logo.png";
+import PrevIcon from "../assets/produk/icon/prev.png";
+import NextIcon from "../assets/produk/icon/next.png";
 
 export default function Produk() {
   const [selectedProduct, setSelectedProduct] = useState(null)
@@ -18,6 +37,10 @@ export default function Produk() {
   const touchEndX = useRef(null)
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768)
     }
@@ -26,110 +49,111 @@ export default function Produk() {
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 
-  const products = [
-    {
-      id: 1,
-      name: "OptiPlex 3000 Tower",
-      brand: "Dell",
-      images: [
-        "../src/assets/produk/Dell/Optiplex/3000_Tower/3.png",
-        "../src/assets/produk/Dell/Optiplex/3000_Tower/4.png"
-      ],
-      specs: {
-        cpu: "Intel Core i5",
-        ram: "8GB",
-        storage: "256GB SSD",
-        gpu: "Integrated Graphics",
-        os: "Windows 10",
-      },
+
+const products = [
+  {
+    id: 1,
+    name: "OptiPlex 3000 Tower",
+    brand: "Dell",
+    images: [
+      optiplex3000Tower3,
+      optiplex3000Tower4
+    ],
+    specs: {
+      cpu: "Intel Core i5",
+      ram: "8GB",
+      storage: "256GB SSD",
+      gpu: "Integrated Graphics",
+      os: "Windows 10",
     },
-    {
-      id: 2,
-      name: "Optiplex 7010 PLUS SFF",
-      brand: "Dell",
-      images: [
-        "../src/assets/produk/Dell/Optiplex/7010_Plus_SFF/1.png"
-      ],
-      specs: {
-        cpu: "Intel Core i7",
-        ram: "16GB",
-        storage: "512GB SSD",
-        gpu: "Integrated Graphics",
-        os: "Windows 10",
-      },
+  },
+  {
+    id: 2,
+    name: "Optiplex 7010 PLUS SFF",
+    brand: "Dell",
+    images: [
+      optiplex7010PlusSFF1
+    ],
+    specs: {
+      cpu: "Intel Core i7",
+      ram: "16GB",
+      storage: "512GB SSD",
+      gpu: "Integrated Graphics",
+      os: "Windows 10",
     },
-    {
-      id: 3,
-      name: "Precision Workstation 5490",
-      brand: "Dell",
-      images: [
-        "../src/assets/produk/Dell/Notebook/Precision/1.png"
-      ],
-      specs: {
-        cpu: "Intel Xeon",
-        ram: "32GB",
-        storage: "1TB SSD",
-        gpu: "NVIDIA Quadro",
-        os: "Windows 10 Pro",
-      },
+  },
+  {
+    id: 3,
+    name: "Precision Workstation 5490",
+    brand: "Dell",
+    images: [
+      precisionWorkstation5490
+    ],
+    specs: {
+      cpu: "Intel Xeon",
+      ram: "32GB",
+      storage: "1TB SSD",
+      gpu: "NVIDIA Quadro",
+      os: "Windows 10 Pro",
     },
-    {
-      id: 4,
-      name: "Latitude 3440 Laptop",
-      brand: "Dell",
-      images: [
-        "../src/assets/produk/Dell/Notebook/Lattitude/3440_Laptop/1.png"
-      ],
-      specs: {
-        cpu: "Intel Core i5",
-        ram: "8GB",
-        storage: "256GB SSD",
-        gpu: "Integrated Graphics",
-        os: "Windows 10",
-      },
+  },
+  {
+    id: 4,
+    name: "Latitude 3440 Laptop",
+    brand: "Dell",
+    images: [
+      latitude3440Laptop
+    ],
+    specs: {
+      cpu: "Intel Core i5",
+      ram: "8GB",
+      storage: "256GB SSD",
+      gpu: "Integrated Graphics",
+      os: "Windows 10",
     },
-    {
-      id: 5,
-      name: "Notebook V14-IIL",
-      brand: "Lenovo",
-      images: [
-        "../src/assets/produk/Lenovo/Notebook_V14/1.png"
-      ],
-      specs: {
-        cpu: "AMD Ryzen 5",
-        ram: "8GB",
-        storage: "512GB SSD",
-        gpu: "Integrated Graphics",
-        os: "Windows 10",
-      },
+  },
+  {
+    id: 5,
+    name: "Notebook V14-IIL",
+    brand: "Lenovo",
+    images: [
+      notebookV14IIL
+    ],
+    specs: {
+      cpu: "AMD Ryzen 5",
+      ram: "8GB",
+      storage: "512GB SSD",
+      gpu: "Integrated Graphics",
+      os: "Windows 10",
     },
-    {
-      id: 6,
-      name: "XPS 9310 Laptop",
-      brand: "Dell",
-      images: [
-        "../src/assets/produk/Dell/Notebook/XPS/9310/1.png",
-        "../src/assets/produk/Dell/Notebook/XPS/9310/2.png"
-      ],
-      specs: {
-        cpu: "Intel Core I7-1185G7",
-        ram: "16GB",
-        storage: "1TB SSD",
-        gpu: "Integrated Graphics",
-        os: "Windows 10 Pro edition",
-      },
+  },
+  {
+    id: 6,
+    name: "XPS 9310 Laptop",
+    brand: "Dell",
+    images: [
+      xps9310Laptop1,
+      xps9310Laptop2
+    ],
+    specs: {
+      cpu: "Intel Core I7-1185G7",
+      ram: "16GB",
+      storage: "1TB SSD",
+      gpu: "Integrated Graphics",
+      os: "Windows 10 Pro edition",
     },
-  ]
+  },
+]
 
   const brands = [
-    { name: "Dell", logo: "../src/assets/Dell_logo.png" },
-    { name: "Lenovo", logo: "../src/assets/lenovo_logo.png" },
-    { name: "Cisco", logo: "../src/assets/Cisco_logo.png" },
-    { name: "Samsung", logo: "../src/assets/samsung_logo.png" },
-    { name: "Asus", logo: "../src/assets/Asus_logo.png" },
-    { name: "HP", logo: "../src/assets/hp_logo.png" },
-    { name: "InFocus", logo: "../src/assets/Infocus_logo.png" },
-    { name: "Apple", logo: "../src/assets/Apple_logo.png" },
+    { name: "Dell", logo: DellLogo },
+    { name: "Lenovo", logo: LenovoLogo },
+    { name: "Cisco", logo: CiscoLogo },
+    { name: "Samsung", logo: SamsungLogo },
+    { name: "Asus", logo: AsusLogo },
+    { name: "HP", logo: HpLogo },
+    { name: "InFocus", logo: InfocusLogo },
+    { name: "Apple", logo: AppleLogo },
   ]
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -354,7 +378,7 @@ export default function Produk() {
                     goToPreviousImage();
                   }}
                 >
-                  <img src="../src/assets/produk/icon/prev.png" alt="Previous" style={{ width: "60px", height: "60px", margin: 0, padding: 0 }} />
+                  <img src={PrevIcon} alt="Previous" style={{ width: "60px", height: "60px", margin: 0, padding: 0 }} />
                 </button>
                 )}
                 <img
@@ -381,7 +405,7 @@ export default function Produk() {
                     goToNextImage();
                   }}
                 >
-                  <img src="../src/assets/produk/icon/next.png" alt="Next" style={{ width: "60px", height: "60px", margin: 0, padding: 0 }} />
+                  <img src={NextIcon} alt="Next" style={{ width: "60px", height: "60px", margin: 0, padding: 0 }} />
                 </button>
                 )}
               </div>

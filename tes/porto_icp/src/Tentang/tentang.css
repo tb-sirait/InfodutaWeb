@@ -1,3 +1,4 @@
+
 .container {
   color: hsl(0, 0%, 13%);
   line-height: 1.6;
@@ -216,6 +217,12 @@ section
     align-items: center;
     gap: 30px;
   }
+}
+
+.struktur-image:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
 
   .intro-image {
     max-width: 100% !important;
@@ -274,4 +281,9 @@ section
   .header h3 {
     font-size: 18px;
   }
+
+
+.Tentang {
+  background-color: #87ceed;
 }
+

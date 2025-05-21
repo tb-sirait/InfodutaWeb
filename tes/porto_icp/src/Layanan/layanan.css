@@ -10,7 +10,7 @@ body {
 }
 
 .bagian-atas{
-  background: url('../src/assets/kantor_icp.png') no-repeat center center fixed;
+  /* background: url('../src/assets/kantor_icp.png') no-repeat center center fixed; */
   min-height: 100vh;
   width: 100%; 
   background-size: cover;
@@ -106,7 +106,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  transition: none;
+  transition: opacity 1s ease, transform 1s ease;
   animation: none; /* remove direct animation to allow class-based animations */
   max-height: none;
 }
@@ -287,6 +287,10 @@ footer {
   .highlight-content-right .highlight-image {
     max-width: 100%;
     margin-bottom: 1rem;
+  }
+  .highlight-content-right .highlight-image {
+    margin-left: auto;
+    margin-right: auto;
   }
   .highlight h2 {
     font-size: 1.8rem;

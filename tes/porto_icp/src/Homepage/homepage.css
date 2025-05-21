@@ -22,6 +22,11 @@ body {
   position: absolute;
 }
 
+.absolute.top-1\/2.right-10 {
+  left: auto;
+  right: 70px;
+}
+
 .top-1\/2 {
   top: 50%;
 }
@@ -358,4 +363,29 @@ section.relative {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+}
+
+.kantor-overlay-container {
+  position: relative;
+  display: inline-block;
+  max-width: 270px;
+  width: 100%;
+}
+
+.kantor-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #87ceeb;
+  opacity: 0.2;
+  pointer-events: none;
+  border-radius: 12px;
+}
+
+.kantor-overlay-container:hover .intro-image,
+.kantor-overlay-container:hover .kantor-overlay {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
 }

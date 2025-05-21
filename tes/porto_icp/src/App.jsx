@@ -8,10 +8,12 @@ import Tentang from "./Tentang/Tentang"
 import Karir from "./Karir/Karir"
 
 import CookieConsent from "./components/CookieConsent"
+import ScrollToTop from "./components/ScrollToTop"
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Navbar />
       <Routes>
         <Route path="/" element={<Homepage />} />
