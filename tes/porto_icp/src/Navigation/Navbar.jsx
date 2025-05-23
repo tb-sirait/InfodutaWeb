@@ -11,7 +11,7 @@ function Navbar () {
 
   return (
     <div className="navbar">
-      <div className="logo-with-text">
+      <Link to="/" className="logo-with-text" onClick={() => setMenuOpen(false)}>
         <img
           alt="null"
           src="logo_icp.svg"
@@ -22,7 +22,7 @@ function Navbar () {
           <p className='nick-name'>Infoduta</p>
           <p className='nick-name'>Computindo Perkasa</p>
         </div>
-      </div>
+      </Link>
       <button className="menu-button" onClick={toggleMenu} aria-label="Toggle menu">
         &#9776;
       </button>

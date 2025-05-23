@@ -59,9 +59,17 @@ function Karir() {
       return;
     }
 
+    // Set the message field value to include name, phone, and CV file name
+    if (formRef.current) {
+      const messageInput = formRef.current.querySelector('input[name="message"]');
+      if (messageInput) {
+        messageInput.value = `Nama: ${formData.from_name}, Nomor Telpon: ${formData.from_phone}, File CV: ${formData.cv ? formData.cv.name : ''}`;
+      }
+    }
+
     sendForm(
       "service_9e0ngq3", // Ganti dengan Service ID kamu
-      "template_emt5vvz", // Ganti dengan Template ID kamu
+      "template_rjxaunz", // Ganti dengan Template ID kamu
       formRef.current,
       "nYM60UZycO9ExRaZF" // Ganti dengan Public Key kamu
     ).then(
@@ -117,6 +125,8 @@ function Karir() {
           <div className="modal-container" onClick={(e) => e.stopPropagation()}>
             <h2 className="text-xl font-bold mb-4">Form Lamaran {jobTitle && `(${jobTitle})`}</h2>
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+              <input type="hidden" name="message" value="" />
+              <input type="hidden" name="to_email" value="hrd@infoduta.com" />
               <div>
                 <label htmlFor="from_name" className="block font-semibold mb-1">Nama</label>
                 <input
